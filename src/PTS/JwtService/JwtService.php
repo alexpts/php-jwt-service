@@ -9,7 +9,7 @@ use Emarref\Jwt\Jwt;
 use Emarref\Jwt\Token;
 use Emarref\Jwt\Claim;
 use Emarref\Jwt\Claim\Factory as ClaimFactory;
-use Emarref\Jwt\Encryption;
+use Emarref\Jwt\Encryption\Factory as EncryptionFactory;
 use Emarref\Jwt\Verification\Context as VerificationContext;
 
 class JwtService
@@ -31,7 +31,7 @@ class JwtService
     {
         $this->claimFactory = $claimFactory;
         $this->lib = $lib;
-        $this->encryption = Encryption\Factory::create($algorithm);
+        $this->encryption = EncryptionFactory::create($algorithm);
         $this->emptyToken = new Token;
     }
 
