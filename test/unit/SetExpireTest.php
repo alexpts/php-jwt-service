@@ -15,9 +15,7 @@ class SetExpireTest extends TestCase
      */
     public function testSetExpire(): void
     {
-        /** @var Claim\Factory $claimFactory */
-        $claimFactory = $this->createMock(Claim\Factory::class);
-        $service = new JwtService(new Hs512(''), new Jwt, $claimFactory);
+        $service = new JwtService(new Hs512(''));
 
         $prop = new \ReflectionProperty(JwtService::class, 'expireSec');
         $prop->setAccessible(true);

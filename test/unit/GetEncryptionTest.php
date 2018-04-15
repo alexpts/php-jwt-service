@@ -11,14 +11,9 @@ use PTS\JwtService\JwtService;
 class GetEncryptionTest extends TestCase
 {
 
-    /**
-     * @throws \ReflectionException
-     */
     public function testSetAudience(): void
     {
-        /** @var Claim\Factory $claimFactory */
-        $claimFactory = $this->createMock(Claim\Factory::class);
-        $service = new JwtService(new Hs512(''), new Jwt, $claimFactory);
+        $service = new JwtService(new Hs512(''));
 
         $actual = $service->getEncryption();
         self::assertInstanceOf(Symmetric::class, $actual);

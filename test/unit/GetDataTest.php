@@ -14,14 +14,9 @@ use PTS\JwtService\JwtService;
 class GetDataTest extends TestCase
 {
 
-    /**
-     * @throws \ReflectionException
-     */
     public function testGetData(): void
     {
-        /** @var Claim\Factory $claimFactory */
-        $claimFactory = $this->createMock(Claim\Factory::class);
-        $service = new JwtService(new Hs512(''), new Jwt, $claimFactory);
+        $service = new JwtService(new Hs512(''));
 
         /** @var PropertyInterface|MockObject $property */
         $property = $this->getMockBuilder(PropertyInterface::class)

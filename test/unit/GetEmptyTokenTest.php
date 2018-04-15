@@ -15,9 +15,7 @@ class GetEmptyTokenTest extends TestCase
      */
     public function testGetEmptyToken(): void
     {
-        /** @var Claim\Factory $claimFactory */
-        $claimFactory = $this->createMock(Claim\Factory::class);
-        $service = new JwtService(new Hs512(''), new Jwt, $claimFactory);
+        $service = new JwtService(new Hs512(''));
 
         $method = new \ReflectionMethod(JwtService::class, 'getEmptyToken');
         $method->setAccessible(true);

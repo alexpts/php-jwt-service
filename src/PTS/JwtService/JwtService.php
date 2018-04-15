@@ -27,10 +27,10 @@ class JwtService
     /** @var Token */
     protected $emptyToken;
 
-    public function __construct(AlgorithmInterface $algorithm, Jwt $lib, ClaimFactory $claimFactory)
+    public function __construct(AlgorithmInterface $algorithm)
     {
-        $this->claimFactory = $claimFactory;
-        $this->lib = $lib;
+        $this->claimFactory = new ClaimFactory;
+        $this->lib = new Jwt;
         $this->encryption = EncryptionFactory::create($algorithm);
         $this->emptyToken = new Token;
     }
@@ -82,27 +82,6 @@ class JwtService
         return $token;
     }
 
-    protected function getEmptyToken(): Token
-    {
-        return clone $this->emptyToken;
-    }
-
-    protected function setPayloadClaim(array $payload, Token $token): void
-    {
-        $claimFactory = $this->getClaimFactory();
-
-        foreach ($payload as $name => $value) {
-            $claim = $claimFactory->get($name);
-            $claim->setValue($value);
-            $token->addClaim($claim);
-        }
-    }
-
-    protected function getClaimFactory(): ClaimFactory
-    {
-        return $this->claimFactory;
-    }
-
     public function decode(string $serializedToken): Token
     {
         return $this->getLib()->deserialize($serializedToken);
@@ -137,6 +116,27 @@ class JwtService
         }
 
         return $data;
+    }
+
+    protected function getEmptyToken(): Token
+    {
+        return clone $this->emptyToken;
+    }
+
+    protected function setPayloadClaim(array $payload, Token $token): void
+    {
+        $claimFactory = $this->getClaimFactory();
+
+        foreach ($payload as $name => $value) {
+            $claim = $claimFactory->get($name);
+            $claim->setValue($value);
+            $token->addClaim($claim);
+        }
+    }
+
+    protected function getClaimFactory(): ClaimFactory
+    {
+        return $this->claimFactory;
     }
 
     protected function getLib(): Jwt

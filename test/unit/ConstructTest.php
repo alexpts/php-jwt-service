@@ -19,10 +19,8 @@ class ConstructTest extends TestCase
     {
         $secret = '#SKJ4nhinjk23l;k40';
         $alg = new Hs512($secret);
-        $lib = $this->createMock(Jwt::class);
-        $claimFactory = $this->createMock(Claim\Factory::class);
 
-        $service = new JwtService($alg, $lib, $claimFactory);
+        $service = new JwtService($alg);
 
         $prop = new \ReflectionProperty(JwtService::class, 'claimFactory');
         $prop2 = new \ReflectionProperty(JwtService::class, 'lib');

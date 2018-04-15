@@ -13,14 +13,13 @@ class AudienceTest extends TestCase
     protected $service;
 
     /**
-     * @throws \ReflectionException
+     * @inheritdoc
      */
     public function setUp()
     {
         parent::setUp();
 
-        $claimFactory = $this->createMock(Claim\Factory::class);
-        $this->service = new JwtService(new Hs512(''), new Jwt, $claimFactory);
+        $this->service = new JwtService(new Hs512(''));
     }
 
     /**
