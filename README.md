@@ -13,4 +13,23 @@ Simple service with work [JWT tokens](https://jwt.io/).
 
 
 ### Demo
-soon
+```php
+<?php
+use PTS\JwtService\JwtService;
+use Emarref\Jwt\Jwt;
+use Emarref\Jwt\Claim\Factory as ClaimFactory;
+
+$secret = 'sa#FD423efdl#';
+$alg = new Hs512($secret);
+
+$service = new JwtService($alg);
+$jwtToken = $service->encode(['userId' => 1]);
+
+// with auto expire
+$service->setExpire(3600);
+$jwtToken2 = $service->encode(['userId' => 1]);
+
+
+$jwtToken3 = 'some string jst token';
+$tokenObject = $service->decode($jwtToken3);
+```
