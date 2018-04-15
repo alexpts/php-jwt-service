@@ -15,9 +15,8 @@ Simple service with work [JWT tokens](https://jwt.io/).
 ### Demo
 ```php
 <?php
+use Emarref\Jwt\Algorithm\Hs512;
 use PTS\JwtService\JwtService;
-use Emarref\Jwt\Jwt;
-use Emarref\Jwt\Claim\Factory as ClaimFactory;
 
 $secret = 'sa#FD423efdl#';
 $alg = new Hs512($secret);
