@@ -56,7 +56,6 @@ class SetPayloadClaimTest extends TestCase
         $method = new ReflectionMethod(JwtService::class, 'setPayloadClaim');
         $method->setAccessible(true);
         $method->invoke($service, $payload, $token);
-        $a = 1;
     }
 
     public function dataProvider(): array

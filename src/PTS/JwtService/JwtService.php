@@ -89,16 +89,19 @@ class JwtService
 
     /**
      * @param Token $token
-     * @param VerificationContext $verificationContext
+     * @param VerificationContext|null $verificationContext
      *
      * @throws VerifyTokenException
      */
-    public function verify(Token $token, VerificationContext $verificationContext): void
+    public function verify(Token $token, VerificationContext $verificationContext = null): void
     {
+        if (null === $verificationContext) {
+            $verificationContext = new VerificationContext($this->getEncryption());
+        }
+
         if ($this->getAudience()) {
             $verificationContext->setAudience($this->getAudience());
         }
-        $verificationContext->setEncryption($this->getEncryption());
 
         try {
             $this->getLib()->verify($token, $verificationContext);
